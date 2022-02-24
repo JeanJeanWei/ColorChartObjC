@@ -9,12 +9,11 @@
 #import "StartupController.h"
 #import "MainViewController.h"
 #import "ColourViewController.h"
-#import <Parse/Parse.h>
 #import "DBManager.h"
 #import "ColorCodeController.h"
 #import "OperationQueueManager.h"
 #import "CancellableOperation.h"
-
+#import "DDFileReader.h"
 
 @implementation StartupController
 
@@ -30,67 +29,27 @@
     return instance;
 }
 
-
-
 - (UIViewController*)startingViewController
 {
-//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-//    testObject[@"foo"] = @"bar";
-//    [testObject saveInBackground];
-//    PFQuery *query = [PFQuery queryWithClassName:@"ColorCodes"];
-//    query.limit = 500;
-//    
-//    
-//    for (int i=0; i<2; i++)
-//    {
-//        query.skip = i*500;
-//        CancellableOperation *op = [[CancellableOperation alloc] initWithPFQuery:query];
-//        [OperationQueueManager.instance addToQueue:op];
-//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//            if (!error) {
-//                
-//                bool success = DBManager.instance.createDB;
-//                if (success) {
-//                    
-//                    
-//                    // The find succeeded.
-//                    NSLog(@"Successfully retrieved %lu scores.", objects.count);
-//                    // Do something with the found objects
-//                    for (PFObject *object in objects) {
-//                        [DBManager.instance saveData:object[@"Name"] ColorHex:object[@"Hex"]];
-//                        NSLog([object[@"Hex"] substringToIndex:2]);
-//                        NSLog([object[@"Hex"] substringWithRange:NSMakeRange(2, 2)]);
-//                        NSLog([object[@"Hex"] substringFromIndex:4]);
-//                        
-//                        NSLog(@"%d",[self parseHexToInt:[object[@"Hex"] substringToIndex:2]] );
-//                        NSLog(@"%d",[self parseHexToInt:[object[@"Hex"] substringWithRange:NSMakeRange(2, 2)]]);
-//                        NSLog(@"%d",[self parseHexToInt:[object[@"Hex"] substringFromIndex:4]]);
-//                        
-//                        NSLog(@"Hex:%@ Name:%@", object[@"Hex"], object[@"Name"]);
-//                    }
-//                    [ColorCodeController.instance parseColorCode];
-//                }
-//            } else {
-//                // Log details of the failure
-//                NSLog(@"Error: %@ %@", error, [error userInfo]);
-//            }
-//        }];
-
-//    }
-    
-    if (!DBManager.instance.dbExist)
-    {
-        [DBManager.instance createDB];
-        for (int i=0; i<2; i++)
+        if (!DBManager.instance.dbExist)
         {
-            PFQuery *query = [PFQuery queryWithClassName:@"ColorCodes"];
-            query.limit = 600;
-            query.skip = i*600;
-            CancellableOperation *op = [[CancellableOperation alloc] initWithPFQuery:query];
-            [OperationQueueManager.instance addToQueue:op];
-        }
-    }
+            [DBManager.instance createDB];
+            NSString* filePath = @"Colors";//file path...
+            NSString* fileRoot = [[NSBundle mainBundle]
+                           pathForResource:filePath ofType:@"txt"];
+            
+            DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:fileRoot];
+            [reader enumerateLinesUsingBlock:^(NSString * line, BOOL * stop) {
+              NSLog(@"read line: %@", line);
+                NSArray *listItems = [line componentsSeparatedByString:@":"];
+                [ColorCodeController.instance buildColorCodeDictionary:listItems[1] ColorHex:listItems[0]];
+            }];
+            [DBManager.instance saveChunk:[ColorCodeController.instance getHexDictionary]];
+            
+//                CancellableOperation *op = [[CancellableOperation alloc] initWithPFQuery:query];
+//                [OperationQueueManager.instance addToQueue:op];
     
+        }
     ColourViewController *viewController = [ColourViewController new];
     
 //    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
@@ -99,8 +58,6 @@
     
     return viewController;
 }
-
-
 
 
 @end

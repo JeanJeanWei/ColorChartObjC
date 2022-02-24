@@ -17,6 +17,7 @@
 + (DBManager*)instance;
 - (BOOL)createDB;
 - (BOOL)saveData:(NSString*)name ColorHex:(NSString*)hex;
+- (BOOL)saveChunk:(NSDictionary*)hexcode;
 - (NSMutableDictionary*)getData;
 - (BOOL)dbExist;
 - (void)removeDbFile;

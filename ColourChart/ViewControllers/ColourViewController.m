@@ -10,7 +10,7 @@
 #import "ColorCodeController.h"
 #import "UIImage+Picker.h"
 #import "MagViewController.h"
-#import <Parse/Parse.h>
+
 #import "CancellableOperation.h"
 #import "OperationQueueManager.h"
 
@@ -247,23 +247,23 @@ CGPoint abPoint;
                      animations:^{
                          if (rgbOffSet != -1)
                          {
-                             rgbInfo.alpha = rgbOffSet == 0 ? 0.8 : 0.5;
-                             rgbInfo.frame = SET_X(rgbInfo.frame, -rgbOffSet);
+                             self->rgbInfo.alpha = rgbOffSet == 0 ? 0.8 : 0.5;
+                             self->rgbInfo.frame = SET_X(self->rgbInfo.frame, -rgbOffSet);
                          }
                          if (iPHONE && actionOffSet != -1)
                          {
-                             actionBar.alpha = actionOffSet == SCREEN_WIDTH ? 0.5 : 0.8;
-                             actionBar.frame = SET_X(actionBar.frame, actionOffSet);
+                             self->actionBar.alpha = actionOffSet == SCREEN_WIDTH ? 0.5 : 0.8;
+                             self->actionBar.frame = SET_X(self->actionBar.frame, actionOffSet);
                              
                          }
                          else if (iPAD && actionOffSet != -1)
                          {
-                             actionBar.alpha = actionOffSet == 0 ? 0.8 : 0.5;
-                             actionBar.frame = SET_X(actionBar.frame, -actionOffSet);
+                             self->actionBar.alpha = actionOffSet == 0 ? 0.8 : 0.5;
+                             self->actionBar.frame = SET_X(self->actionBar.frame, -actionOffSet);
                          }
 
                          // change scroll view frame
-                         CGRect frame = scrollView.frame;
+        CGRect frame = self->scrollView.frame;
                          if (iPHONE)
                          {
                              frame = [self getScrollViewFrameiPhone:frame];
@@ -273,14 +273,14 @@ CGPoint abPoint;
                              frame = [self getScrollViewFrameiPad:frame];
                          }
                          
-                         scrollView.frame = frame;
-                         CGFloat currentScale = imageView.frame.size.width / imageView.bounds.size.width;
-                         tappedPoint.center = CGPointMake(abPoint.x*currentScale , abPoint.y*currentScale);
+        self->scrollView.frame = frame;
+        CGFloat currentScale = self->imageView.frame.size.width / self->imageView.bounds.size.width;
+        self->tappedPoint.center = CGPointMake(abPoint.x*currentScale , abPoint.y*currentScale);
                      }
                      completion:^(BOOL finished){
                          if (finished) {
-                             CGFloat currentScale = imageView.frame.size.width / imageView.bounds.size.width;
-                             tappedPoint.center = CGPointMake(abPoint.x*currentScale , abPoint.y*currentScale);
+                             CGFloat currentScale = self->imageView.frame.size.width / self->imageView.bounds.size.width;
+                             self->tappedPoint.center = CGPointMake(abPoint.x*currentScale , abPoint.y*currentScale);
                          }
                          
                      }];
@@ -390,21 +390,7 @@ CGPoint abPoint;
     [tappedPoint removeFromSuperview];
     [scrollView addSubview:tappedPoint];
     
-//    PFQuery *query = [PFQuery queryWithClassName:@"ColorCodes"];
-//    [query whereKey:@"Hex" equalTo:@"Dan Stemkoski"];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            // The find succeeded.
-//            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-//            // Do something with the found objects
-//            for (PFObject *object in objects) {
-//                NSLog(@"%@", object.objectId);
-//            }
-//        } else {
-//            // Log details of the failure
-//            NSLog(@"Error: %@ %@", error, [error userInfo]);
-//        }
-//    }];
+
     
 //    MagViewController *magViewController = [MagViewController new];
 //    magViewController.providesPresentationContextTransitionStyle = true;
@@ -462,7 +448,7 @@ CGPoint abPoint;
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         scrollView.alpha = 1;
+        self->scrollView.alpha = 1;
                      }
                      completion:nil];
 }

@@ -20,15 +20,13 @@ NSString *ColorTable = @"Color";
     if (!instance)
     {
         instance = [DBManager new];
-        
     }
-    
+    [instance getDbPath];
     return instance;
 }
 
-- (BOOL)dbExist
+- (void)getDbPath
 {
-    bool exist = true;
     NSString *docsDir;
     NSArray *dirPaths;
     // Get the documents directory
@@ -37,6 +35,12 @@ NSString *ColorTable = @"Color";
     docsDir = dirPaths[0];
     // Build the path to the database file
     databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:dbFilename]];
+}
+
+- (BOOL)dbExist
+{
+    bool exist = true;
+    
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath: databasePath ] == NO)
         exist = false;
@@ -45,33 +49,16 @@ NSString *ColorTable = @"Color";
 
 - (void)removeDbFile
 {
-    NSString *docsDir;
-    NSArray *dirPaths;
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains
-    (NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = dirPaths[0];
-    // Build the path to the database file
-    NSString *filePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:dbFilename]];
     NSFileManager *filemgr = [NSFileManager defaultManager];
     NSError *error = nil;
-    if ([filemgr fileExistsAtPath: filePath])
+    if ([filemgr fileExistsAtPath: databasePath])
     {
-        [filemgr removeItemAtPath:filePath error:&error];
+        [filemgr removeItemAtPath:databasePath error:&error];
     }
-    
 }
 
 - (BOOL)createDB
 {
-//    NSString *docsDir;
-//    NSArray *dirPaths;
-//    // Get the documents directory
-//    dirPaths = NSSearchPathForDirectoriesInDomains
-//    (NSDocumentDirectory, NSUserDomainMask, YES);
-//    docsDir = dirPaths[0];
-//    // Build the path to the database file
-//    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:dbFilename]];
     BOOL isSuccess = YES;
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath: databasePath ] == NO)
@@ -113,6 +100,38 @@ NSString *ColorTable = @"Color";
             success = true;
         }
         sqlite3_reset(statement);
+        sqlite3_close(database);
+    }
+    return success;
+}
+
+- (BOOL)saveChunk:(NSDictionary*)hexcode
+{
+    const char *dbpath = [databasePath UTF8String];
+    bool success = false;
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK)
+    {
+        for (NSString *key in hexcode)
+        {
+            NSString *colorName = [hexcode objectForKey:key];
+            NSString* hex = key;
+            NSString *insertSQL = [NSString stringWithFormat:@"insert into %@ (name, hex) values (\"%@\",\"%@\")",ColorTable, colorName, hex];
+            NSLog(@"insertSQL : %@",insertSQL);
+            const char *insert_stmt = [insertSQL UTF8String];
+            sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
+            sqlite3_reset(statement);
+        }
+        
+        
+        //sqlite3_close(database);
     }
     return success;
 }
@@ -144,6 +163,7 @@ NSString *ColorTable = @"Color";
             }
             
             sqlite3_reset(statement);
+            sqlite3_close(database);
         }
     }
     return colorHex;

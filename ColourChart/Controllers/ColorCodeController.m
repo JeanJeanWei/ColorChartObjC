@@ -8,7 +8,6 @@
 
 #import "ColorCodeController.h"
 #import "DBManager.h"
-#import <Parse/Parse.h>
 #import "OperationQueueManager.h"
 #import "CancellableOperation.h"
 
@@ -24,9 +23,20 @@
     {
         instance = [ColorCodeController new];
         [instance initArrays];
+        [instance initHexDictionary];
     }
     
     return instance;
+}
+
+- (void)initHexDictionary
+{
+    hexCode = [NSMutableDictionary new];
+}
+
+- (NSMutableDictionary*)getHexDictionary
+{
+    return hexCode;
 }
 
 - (void)initArrays
@@ -37,11 +47,17 @@
     name = [NSMutableArray new];
 }
 
+- (void)buildColorCodeDictionary:(NSString*)name ColorHex:(NSString*)hex
+{
+    [hexCode setValue:name forKey:hex];
+}
+
 - (void)parseColorCode
 {
     @try
     {
-        NSDictionary *hexCode = [DBManager.instance getData];
+        if (!hexCode || hexCode.count == 0)
+            hexCode = [DBManager.instance getData];
         if (!name)
             [self initArrays];
         
@@ -62,20 +78,7 @@
     }
     @catch (NSException *exception)
     {
-        [DBManager.instance removeDbFile];
-        [self initArrays];
-        if (!DBManager.instance.dbExist)
-        {
-            [DBManager.instance createDB];
-            for (int i=0; i<2; i++)
-            {
-                PFQuery *query = [PFQuery queryWithClassName:@"ColorCodes"];
-                query.limit = 600;
-                query.skip = i*600;
-                CancellableOperation *op = [[CancellableOperation alloc] initWithPFQuery:query];
-                [OperationQueueManager.instance addToQueue:op];
-            }
-        }
+        NSLog(@"NSException : %@",exception);
     }
     @finally {
         //<#Code that gets executed whether or not an exception is thrown#>

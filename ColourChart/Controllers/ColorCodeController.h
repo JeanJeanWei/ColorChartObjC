@@ -10,7 +10,7 @@
 
 @interface ColorCodeController : NSObject
 {
-
+    NSMutableDictionary *hexCode;
 }
 
 @property (strong) NSMutableArray* red;
@@ -20,6 +20,8 @@
 
 + (ColorCodeController*)instance;
 
+- (void)buildColorCodeDictionary:(NSString*)name ColorHex:(NSString*)hex;
+- (NSMutableDictionary*)getHexDictionary;
 - (void)parseColorCode;
 - (NSString*)getColorName:(int)r g:(int)g b:(int)b;
 @end

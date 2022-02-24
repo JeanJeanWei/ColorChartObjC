@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse/Parse.h>
 
 @interface CancellableOperation : NSOperation
 {
-    PFQuery *query;
+    NSString *record;
 }
 
-- (id)initWithPFQuery:(PFQuery*)pfQuery;
+- (id)initWithPFQuery:(NSString*)record;
 
 @end

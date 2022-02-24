@@ -12,12 +12,12 @@
 
 @implementation CancellableOperation
 
-- (id)initWithPFQuery:(PFQuery*)pfQuery
+- (id)initWithPFQuery:(NSString*)str
 {
     if (![super init])
         return nil;
     
-    query = pfQuery;
+    record = str;
     return self;
 }
 
@@ -29,18 +29,18 @@
         return;
         
        
-        NSArray *objects = [query findObjects];// findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (objects) {
+        //NSArray *objects = [query findObjects]; findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            //if (objects) {
                 
-                bool success = DBManager.instance.createDB;
-                if (success) {
+            //    bool success = DBManager.instance.createDB;
+           //     if (success) {
                     
                     
                     // The find succeeded.
                     //NSLog(@"Successfully retrieved %lu scores.", objects.count);
                     // Do something with the found objects
-                    for (PFObject *object in objects) {
-                        [DBManager.instance saveData:object[@"Name"] ColorHex:object[@"Hex"]];
+//                    for (PFObject *object in objects) {
+//                        [DBManager.instance saveData:object[@"Name"] ColorHex:object[@"Hex"]];
 //                        NSLog([object[@"Hex"] substringToIndex:2]);
 //                        NSLog([object[@"Hex"] substringWithRange:NSMakeRange(2, 2)]);
 //                        NSLog([object[@"Hex"] substringFromIndex:4]);
@@ -49,16 +49,16 @@
 //                        NSLog(@"%d",[self parseHexToInt:[object[@"Hex"] substringWithRange:NSMakeRange(2, 2)]]);
 //                        NSLog(@"%d",[self parseHexToInt:[object[@"Hex"] substringFromIndex:4]]);
                         
-                        NSLog(@"Hex:%@ Name:%@", object[@"Hex"], object[@"Name"]);
-                    }
+           //             NSLog(@"Hex:%@ Name:%@", object[@"Hex"], object[@"Name"]);
+          //          }
                     
-                    
-                }
+                    //
+           //     }
                 //NSLog(@"objects >>>>> :%i", objects.count);
-            } else {
+        //    } else {
                 // Log details of the failure
                 //NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
+       //     }
         //}];
     }
 }
