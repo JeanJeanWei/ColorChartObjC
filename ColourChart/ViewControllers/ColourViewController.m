@@ -28,12 +28,10 @@ ControlStates controlState = None;
 CGPoint abPoint;
 int viewWidth;
 int viewHeight;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
-
     
     ipc = [UIImagePickerController new];
     ipc.delegate = self;
@@ -45,7 +43,7 @@ int viewHeight;
     imageView = [[UIImageView alloc] initWithFrame:frame];
     
     scrollView.contentSize = imageView.frame.size;
-    scrollView.alpha = 0;
+    //scrollView.alpha = 0;
     imageView.image = image;
     imageView.userInteractionEnabled = YES;
     [scrollView addSubview:imageView];
@@ -96,11 +94,11 @@ int viewHeight;
     [scrollView setBackgroundColor:[UIColor blackColor]];
     [self.view setBackgroundColor:[UIColor blackColor]];
     
-    if (scrollView.alpha == 0.5)
-    {
-        scrollView.alpha = 1;
-        return;
-    }
+//    if (scrollView.alpha == 0.5)
+//    {
+//        scrollView.alpha = 1;
+//        return;
+//    }
     CGFloat w = GET_WIDTH(scrollView.frame) > viewWidth-MARGIN*2 ? viewWidth-MARGIN*2 : GET_WIDTH(scrollView.frame);
     CGFloat h = GET_HEIGHT(scrollView.frame) > viewHeight-MARGIN*2 ? viewHeight-MARGIN*2 : GET_HEIGHT(scrollView.frame);
     
@@ -446,16 +444,16 @@ int viewHeight;
     }
     else
     {
-        rgbInfo.frame = SET_X(rgbInfo.frame , -GET_WIDTH(rgbInfo.frame));
-        actionBar.frame = SET_X(actionBar.frame , -GET_WIDTH(actionBar.frame));
+//        rgbInfo.frame = SET_X(rgbInfo.frame , -GET_WIDTH(rgbInfo.frame));
+//        actionBar.frame = SET_X(actionBar.frame , -GET_WIDTH(actionBar.frame));
     }
-    [UIView animateWithDuration:0.2f
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-        self->scrollView.alpha = 1;
-                     }
-                     completion:nil];
+//    [UIView animateWithDuration:0.2f
+//                          delay:0
+//                        options:UIViewAnimationOptionCurveEaseIn
+//                     animations:^{
+//        self->scrollView.alpha = 1;
+//                     }
+//                     completion:nil];
 }
 
 - (void)doTransform:(CGAffineTransform) transform
@@ -509,20 +507,9 @@ int viewHeight;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
     {
         ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//        if (iPHONE)
-//        {
-            [self presentViewController:ipc animated:true completion:nil];
-//        }
-//        else
-//        {
-//            popover =  [[UIPopoverController alloc]
-//                            initWithContentViewController:ipc];
-//
-//            popover.delegate = self;
-//            [popover presentPopoverFromRect:actionBar.bounds inView:actionBar permittedArrowDirections:UIPopoverArrowDirectionAny animated:true];
-  //      }
-        [self showAction:false];
-        [self showRGB:false];
+        [self presentViewController:ipc animated:true completion:nil];
+        [self showAction:true];
+        [self showRGB:true];
     } else {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Unable to acces selected photo sources"
                                                        message:@"Photo Library is not available in this device."
@@ -563,7 +550,7 @@ int viewHeight;
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     // reset imageView transform
-    scrollView.alpha = 0.5;
+    //scrollView.alpha = 0.5;
     [ipc dismissViewControllerAnimated:true completion:^{
         if (iPAD && picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary)
         {

@@ -15,6 +15,12 @@
 		280BD1E31DE9220A006D538A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280BD1E21DE9220A006D538A /* libsqlite3.0.tbd */; };
 		280BD1E51DE92268006D538A /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280BD1E41DE92268006D538A /* libz.1.2.8.tbd */; };
 		2829EB371AB87ADF00940029 /* ColourViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2829EB361AB87ADF00940029 /* ColourViewController-iPad.xib */; };
+		283B785C27DBA6CA002E8E5E /* camera_icon_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283B785627DBA6CA002E8E5E /* camera_icon_white@2x.png */; };
+		283B785D27DBA6CA002E8E5E /* picture_icon_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283B785727DBA6CA002E8E5E /* picture_icon_white@3x.png */; };
+		283B785E27DBA6CA002E8E5E /* camera_icon_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 283B785827DBA6CA002E8E5E /* camera_icon_white.png */; };
+		283B785F27DBA6CA002E8E5E /* picture_icon_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283B785927DBA6CA002E8E5E /* picture_icon_white@2x.png */; };
+		283B786027DBA6CA002E8E5E /* picture_icon_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 283B785A27DBA6CA002E8E5E /* picture_icon_white.png */; };
+		283B786127DBA6CA002E8E5E /* camera_icon_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283B785B27DBA6CA002E8E5E /* camera_icon_white@3x.png */; };
 		2864C2331B0C382700C3681E /* OperationQueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2864C2321B0C382700C3681E /* OperationQueueManager.m */; };
 		286A92D827DAD448006A9C95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 286A92D727DAD448006A9C95 /* LaunchScreen.storyboard */; };
 		286A92DC27DAD4B1006A9C95 /* icewhale_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286A92D927DAD4B1006A9C95 /* icewhale_logo.png */; };
@@ -27,16 +33,8 @@
 		286C33C427C702AD0058679E /* DDFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C33C327C702AD0058679E /* DDFileReader.m */; };
 		286C33C727C815810058679E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286C33C627C815810058679E /* CoreServices.framework */; };
 		28747C391AAFE8F30074260E /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28747C331AAFE8F30074260E /* green@2x.png */; };
-		28747C3A1AAFE8F30074260E /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 28747C341AAFE8F30074260E /* orange.png */; };
-		28747C3B1AAFE8F30074260E /* orange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28747C351AAFE8F30074260E /* orange@2x.png */; };
 		28747C3C1AAFE8F30074260E /* red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28747C361AAFE8F30074260E /* red@2x.png */; };
-		28747C3D1AAFE8F30074260E /* Violet.png in Resources */ = {isa = PBXBuildFile; fileRef = 28747C371AAFE8F30074260E /* Violet.png */; };
-		28747C3E1AAFE8F30074260E /* Violet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28747C381AAFE8F30074260E /* Violet@2x.png */; };
 		28747C401AB0F3EA0074260E /* blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28747C3F1AB0F3EA0074260E /* blue@2x.png */; };
-		2887B49C1AB611F600B9835D /* VioletR.png in Resources */ = {isa = PBXBuildFile; fileRef = 2887B49A1AB611F600B9835D /* VioletR.png */; };
-		2887B49D1AB611F600B9835D /* VioletR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2887B49B1AB611F600B9835D /* VioletR@2x.png */; };
-		2887B4A01AB6120400B9835D /* orangeR.png in Resources */ = {isa = PBXBuildFile; fileRef = 2887B49E1AB6120400B9835D /* orangeR.png */; };
-		2887B4A11AB6120400B9835D /* orangeR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2887B49F1AB6120400B9835D /* orangeR@2x.png */; };
 		289960A41AAE2969007CE769 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 289960A11AAE2969007CE769 /* blue.png */; };
 		289960A51AAE2969007CE769 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 289960A21AAE2969007CE769 /* green.png */; };
 		289960A61AAE2969007CE769 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 289960A31AAE2969007CE769 /* red.png */; };
@@ -93,6 +91,12 @@
 		280BD1E21DE9220A006D538A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		280BD1E41DE92268006D538A /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
 		2829EB361AB87ADF00940029 /* ColourViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "ColourViewController-iPad.xib"; path = "ViewControllers/ColourViewController-iPad.xib"; sourceTree = "<group>"; };
+		283B785627DBA6CA002E8E5E /* camera_icon_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_white@2x.png"; sourceTree = "<group>"; };
+		283B785727DBA6CA002E8E5E /* picture_icon_white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "picture_icon_white@3x.png"; sourceTree = "<group>"; };
+		283B785827DBA6CA002E8E5E /* camera_icon_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_icon_white.png; sourceTree = "<group>"; };
+		283B785927DBA6CA002E8E5E /* picture_icon_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "picture_icon_white@2x.png"; sourceTree = "<group>"; };
+		283B785A27DBA6CA002E8E5E /* picture_icon_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_icon_white.png; sourceTree = "<group>"; };
+		283B785B27DBA6CA002E8E5E /* camera_icon_white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_white@3x.png"; sourceTree = "<group>"; };
 		2864C2311B0C382700C3681E /* OperationQueueManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationQueueManager.h; sourceTree = "<group>"; };
 		2864C2321B0C382700C3681E /* OperationQueueManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperationQueueManager.m; sourceTree = "<group>"; };
 		286A92D727DAD448006A9C95 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -107,16 +111,8 @@
 		286C33C327C702AD0058679E /* DDFileReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDFileReader.m; sourceTree = "<group>"; };
 		286C33C627C815810058679E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		28747C331AAFE8F30074260E /* green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green@2x.png"; sourceTree = "<group>"; };
-		28747C341AAFE8F30074260E /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
-		28747C351AAFE8F30074260E /* orange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orange@2x.png"; sourceTree = "<group>"; };
 		28747C361AAFE8F30074260E /* red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@2x.png"; sourceTree = "<group>"; };
-		28747C371AAFE8F30074260E /* Violet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Violet.png; sourceTree = "<group>"; };
-		28747C381AAFE8F30074260E /* Violet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Violet@2x.png"; sourceTree = "<group>"; };
 		28747C3F1AB0F3EA0074260E /* blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue@2x.png"; sourceTree = "<group>"; };
-		2887B49A1AB611F600B9835D /* VioletR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VioletR.png; sourceTree = "<group>"; };
-		2887B49B1AB611F600B9835D /* VioletR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VioletR@2x.png"; sourceTree = "<group>"; };
-		2887B49E1AB6120400B9835D /* orangeR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangeR.png; sourceTree = "<group>"; };
-		2887B49F1AB6120400B9835D /* orangeR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orangeR@2x.png"; sourceTree = "<group>"; };
 		289960A11AAE2969007CE769 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		289960A21AAE2969007CE769 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		289960A31AAE2969007CE769 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
@@ -263,21 +259,19 @@
 		289960A01AAE2969007CE769 /* Tags */ = {
 			isa = PBXGroup;
 			children = (
+				283B785827DBA6CA002E8E5E /* camera_icon_white.png */,
+				283B785627DBA6CA002E8E5E /* camera_icon_white@2x.png */,
+				283B785B27DBA6CA002E8E5E /* camera_icon_white@3x.png */,
+				283B785A27DBA6CA002E8E5E /* picture_icon_white.png */,
+				283B785927DBA6CA002E8E5E /* picture_icon_white@2x.png */,
+				283B785727DBA6CA002E8E5E /* picture_icon_white@3x.png */,
 				28C916571B2FAD87002F2328 /* black.png */,
 				28C916581B2FAD87002F2328 /* black@2x.png */,
 				28C916531B2FAD78002F2328 /* white.png */,
 				28C916541B2FAD78002F2328 /* white@2x.png */,
-				2887B49E1AB6120400B9835D /* orangeR.png */,
-				2887B49F1AB6120400B9835D /* orangeR@2x.png */,
-				2887B49A1AB611F600B9835D /* VioletR.png */,
-				2887B49B1AB611F600B9835D /* VioletR@2x.png */,
 				28747C3F1AB0F3EA0074260E /* blue@2x.png */,
 				28747C331AAFE8F30074260E /* green@2x.png */,
-				28747C341AAFE8F30074260E /* orange.png */,
-				28747C351AAFE8F30074260E /* orange@2x.png */,
 				28747C361AAFE8F30074260E /* red@2x.png */,
-				28747C371AAFE8F30074260E /* Violet.png */,
-				28747C381AAFE8F30074260E /* Violet@2x.png */,
 				289960A11AAE2969007CE769 /* blue.png */,
 				289960A21AAE2969007CE769 /* green.png */,
 				289960A31AAE2969007CE769 /* red.png */,
@@ -455,37 +449,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				286A92D827DAD448006A9C95 /* LaunchScreen.storyboard in Resources */,
-				28747C3B1AAFE8F30074260E /* orange@2x.png in Resources */,
 				4FE9A4091A636BD500681491 /* ColourViewController-iPhone.xib in Resources */,
 				286C33C127C6C6C00058679E /* Colors.txt in Resources */,
 				28747C391AAFE8F30074260E /* green@2x.png in Resources */,
-				2887B4A01AB6120400B9835D /* orangeR.png in Resources */,
 				4FDBAB3C1A78767600743297 /* MainViewController-iPhone.xib in Resources */,
+				283B786127DBA6CA002E8E5E /* camera_icon_white@3x.png in Resources */,
 				286A92DD27DAD4B1006A9C95 /* icewhale_logo@3x.png in Resources */,
 				28015D141A5C622A00E6F938 /* Images.xcassets in Resources */,
 				28747C401AB0F3EA0074260E /* blue@2x.png in Resources */,
 				28C916551B2FAD78002F2328 /* white.png in Resources */,
-				2887B49D1AB611F600B9835D /* VioletR@2x.png in Resources */,
+				283B786027DBA6CA002E8E5E /* picture_icon_white.png in Resources */,
+				283B785F27DBA6CA002E8E5E /* picture_icon_white@2x.png in Resources */,
 				289960A61AAE2969007CE769 /* red.png in Resources */,
 				28C916561B2FAD78002F2328 /* white@2x.png in Resources */,
-				28747C3A1AAFE8F30074260E /* orange.png in Resources */,
 				289960A51AAE2969007CE769 /* green.png in Resources */,
 				28C23C9F1AD61F8E00C8055B /* MainViewController-iPad.xib in Resources */,
 				28747C3C1AAFE8F30074260E /* red@2x.png in Resources */,
-				2887B49C1AB611F600B9835D /* VioletR.png in Resources */,
 				289960A41AAE2969007CE769 /* blue.png in Resources */,
 				28C916591B2FAD87002F2328 /* black.png in Resources */,
 				286A92E327DB192F006A9C95 /* cursor_icon@2x.png in Resources */,
 				28C9165A1B2FAD87002F2328 /* black@2x.png in Resources */,
-				28747C3D1AAFE8F30074260E /* Violet.png in Resources */,
+				283B785D27DBA6CA002E8E5E /* picture_icon_white@3x.png in Resources */,
+				283B785E27DBA6CA002E8E5E /* camera_icon_white.png in Resources */,
 				286A92DC27DAD4B1006A9C95 /* icewhale_logo.png in Resources */,
 				286A92E427DB192F006A9C95 /* cursor_icon@3x.png in Resources */,
 				289E97E11AB4C7610009B759 /* color chart.png in Resources */,
 				2829EB371AB87ADF00940029 /* ColourViewController-iPad.xib in Resources */,
-				2887B4A11AB6120400B9835D /* orangeR@2x.png in Resources */,
+				283B785C27DBA6CA002E8E5E /* camera_icon_white@2x.png in Resources */,
 				28C23CAB1AD620ED00C8055B /* MagViewController.xib in Resources */,
 				286A92E227DB192F006A9C95 /* cursor_icon.png in Resources */,
-				28747C3E1AAFE8F30074260E /* Violet@2x.png in Resources */,
 				286A92DE27DAD4B1006A9C95 /* icewhale_logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,7 +657,7 @@
 				INFOPLIST_FILE = ColourChart/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.icewhale.color;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -689,7 +681,7 @@
 				INFOPLIST_FILE = ColourChart/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.icewhale.color;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
