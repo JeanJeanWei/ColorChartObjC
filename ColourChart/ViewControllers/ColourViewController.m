@@ -509,18 +509,18 @@ int viewHeight;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
     {
         ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        if (iPHONE)
-        {
+//        if (iPHONE)
+//        {
             [self presentViewController:ipc animated:true completion:nil];
-        }
-        else
-        {
-            popover =  [[UIPopoverController alloc]
-                            initWithContentViewController:ipc];
-            
-            popover.delegate = self;
-            [popover presentPopoverFromRect:actionBar.bounds inView:actionBar permittedArrowDirections:UIPopoverArrowDirectionAny animated:true];
-        }
+//        }
+//        else
+//        {
+//            popover =  [[UIPopoverController alloc]
+//                            initWithContentViewController:ipc];
+//
+//            popover.delegate = self;
+//            [popover presentPopoverFromRect:actionBar.bounds inView:actionBar permittedArrowDirections:UIPopoverArrowDirectionAny animated:true];
+  //      }
         [self showAction:false];
         [self showRGB:false];
     } else {
