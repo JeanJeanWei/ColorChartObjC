@@ -26,7 +26,7 @@ typedef enum
     IBOutlet UIButton *colorCodeBtn;
     IBOutlet UIButton *colorNameBtn;
     
-    IBOutlet UILabel *tappedPoint;
+    IBOutlet UIButton *tappedPoint;
     
     UIImageView *imageView;
     UIImage *image;

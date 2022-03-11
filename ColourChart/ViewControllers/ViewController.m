@@ -53,10 +53,7 @@
     view.layer.masksToBounds = true;
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
+
 -(UIViewController *)childViewControllerForStatusBarHidden
 {
     return nil;
@@ -64,7 +61,6 @@
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

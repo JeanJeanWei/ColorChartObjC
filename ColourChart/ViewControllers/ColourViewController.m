@@ -20,12 +20,14 @@ const float MINIMUM_SCALE = 0.1;
 const float MAXIMUM_SCALE = 1.5;
 
 const int MARGIN = 14;
+const int StatusBar = 44;
 const int BOTTON_BAR_HEIGHT = 100;
 const int SIDE_BAR_WIDTH = 122;
 const int ACTION_BAR_WIDTH = 110;
 ControlStates controlState = None;
 CGPoint abPoint;
-
+int viewWidth;
+int viewHeight;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -78,6 +80,9 @@ CGPoint abPoint;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    viewWidth = GET_WIDTH(self.view.frame);
+    viewHeight = GET_HEIGHT(self.view.frame);
     [self prepareView];
 }
 
@@ -85,6 +90,7 @@ CGPoint abPoint;
 {
     // reset page status to default values
     tappedPoint.hidden = true;
+    [tappedPoint setTitle:@"" forState:UIControlStateNormal];
     [colorCodeBtn setTitle:@"R:G:B:" forState:UIControlStateNormal];
     [colorNameBtn setTitle:@"" forState:UIControlStateNormal];
     [scrollView setBackgroundColor:[UIColor blackColor]];
@@ -95,9 +101,8 @@ CGPoint abPoint;
         scrollView.alpha = 1;
         return;
     }
-    
-    CGFloat w = GET_WIDTH(scrollView.frame) > SCREEN_WIDTH-MARGIN*2 ? SCREEN_WIDTH-MARGIN*2 : GET_WIDTH(scrollView.frame);
-    CGFloat h = GET_HEIGHT(scrollView.frame) > SCREEN_HEIGHT-MARGIN*2 ? SCREEN_HEIGHT-MARGIN*2 : GET_HEIGHT(scrollView.frame);
+    CGFloat w = GET_WIDTH(scrollView.frame) > viewWidth-MARGIN*2 ? viewWidth-MARGIN*2 : GET_WIDTH(scrollView.frame);
+    CGFloat h = GET_HEIGHT(scrollView.frame) > viewHeight-MARGIN*2 ? viewHeight-MARGIN*2 : GET_HEIGHT(scrollView.frame);
     
     CGFloat newScaleW = w/imageView.frame.size.width;
     CGFloat newScaleH = h/imageView.frame.size.height;
@@ -122,12 +127,12 @@ CGPoint abPoint;
             NSLog(@"Swipe Left");
             if (iPHONE)
             {
-                if (xPos < SCREEN_WIDTH/2) [self showRGB:false];
+                if (xPos < viewWidth/2) [self showRGB:false];
                 else [self showAction:true];
             }
             else
             {
-                if (xPos < SCREEN_HEIGHT/2) [self showRGB:false];
+                if (xPos < viewHeight/2) [self showRGB:false];
                 else [self showAction:false];
             }
             break;
@@ -136,12 +141,12 @@ CGPoint abPoint;
             NSLog(@"Swipe Right");
             if (iPHONE)
             {
-                if (xPos < SCREEN_WIDTH/2) [self showRGB:true];
+                if (xPos < viewWidth/2) [self showRGB:true];
                 else [self showAction:false];
             }
             else
             {
-                if (xPos < SCREEN_HEIGHT/2) [self showRGB:true];
+                if (xPos < viewHeight/2) [self showRGB:true];
                 else [self showAction:true];
             }
             break;
@@ -228,11 +233,11 @@ CGPoint abPoint;
         default:
             break;
     }
-    int offSetX = iPHONE ? SCREEN_WIDTH : GET_WIDTH(actionBar.frame);
+    int offSetX = iPHONE ? viewWidth : GET_WIDTH(actionBar.frame);
     
     if (action)
     {
-        offSetX = iPHONE ? SCREEN_WIDTH - GET_WIDTH(actionBar.frame) : 0;
+        offSetX = iPHONE ? viewWidth - GET_WIDTH(actionBar.frame) : 0;
     }
 
     [self layControls:-1 andActionBar:offSetX];
@@ -252,7 +257,7 @@ CGPoint abPoint;
                          }
                          if (iPHONE && actionOffSet != -1)
                          {
-                             self->actionBar.alpha = actionOffSet == SCREEN_WIDTH ? 0.5 : 0.8;
+                             self->actionBar.alpha = actionOffSet == viewWidth ? 0.5 : 0.8;
                              self->actionBar.frame = SET_X(self->actionBar.frame, actionOffSet);
                              
                          }
@@ -289,12 +294,12 @@ CGPoint abPoint;
 {
     if (controlState != None)
     {
-        frame.size.width = SCREEN_WIDTH - SIDE_BAR_WIDTH - MARGIN*2;
+        frame.size.width = viewWidth - SIDE_BAR_WIDTH - MARGIN*2;
         frame.origin.x = SIDE_BAR_WIDTH + MARGIN;
     }
     else
     {
-        frame.size.width = SCREEN_WIDTH-MARGIN*2;
+        frame.size.width = viewWidth-MARGIN*2;
         frame.origin.x = MARGIN;
     }
     
@@ -303,20 +308,20 @@ CGPoint abPoint;
         frame.size.width = GET_WIDTH(imageView.frame);
     }
 
-    CGFloat diff = (frame.origin.x + frame.size.width) - (SCREEN_WIDTH - MARGIN);
+    CGFloat diff = (frame.origin.x + frame.size.width) - (viewWidth - MARGIN);
     if (diff < 0)
     {
         frame.origin.x -= diff/2;
     }
     
     frame.origin.y = MARGIN;
-    frame.size.height = SCREEN_HEIGHT-MARGIN*2;
+    frame.size.height = viewHeight-MARGIN*2;
     if (GET_HEIGHT(imageView.frame) < frame.size.height)
     {
         frame.size.height = GET_HEIGHT(imageView.frame);
     }
    
-    diff = SCREEN_HEIGHT-MARGIN*2 - frame.size.height;
+    diff = viewHeight-MARGIN*2 - frame.size.height;
     if (diff > 0)
     {
         frame.origin.y += diff/2;
@@ -329,11 +334,11 @@ CGPoint abPoint;
 {
     if (controlState != None)
     {
-        frame.size.height = SCREEN_HEIGHT-BOTTON_BAR_HEIGHT-MARGIN*2;
+        frame.size.height = viewHeight-BOTTON_BAR_HEIGHT-StatusBar-MARGIN;
     }
     else
     {
-        frame.size.height = SCREEN_HEIGHT-MARGIN*2;
+        frame.size.height = viewHeight-StatusBar-MARGIN;
     }
     
     
@@ -341,21 +346,21 @@ CGPoint abPoint;
     {
         frame.size.height = GET_HEIGHT(imageView.frame);
     }
-    if (frame.origin.y > MARGIN)
+    if (frame.origin.y > StatusBar)
     {
-        frame.origin.y = MARGIN;
-        if (frame.size.height < SCREEN_HEIGHT-BOTTON_BAR_HEIGHT-MARGIN*2)
+        frame.origin.y = StatusBar;
+        if (frame.size.height < viewHeight-BOTTON_BAR_HEIGHT-StatusBar-MARGIN)
         {
             if (controlState == None)
-                frame.origin.y = (SCREEN_HEIGHT-MARGIN*2-frame.size.height)/2 + MARGIN;
+                frame.origin.y = (viewHeight-StatusBar-MARGIN-frame.size.height)/2 + StatusBar;
             else
-                frame.origin.y = (SCREEN_HEIGHT-BOTTON_BAR_HEIGHT-MARGIN*2-frame.size.height)/2 + MARGIN;
+                frame.origin.y = (viewHeight-BOTTON_BAR_HEIGHT-StatusBar-MARGIN-frame.size.height)/2 + StatusBar;
         }
         
     }
-    else if (frame.size.height < SCREEN_HEIGHT-MARGIN*2 && controlState == None)
+    else if (frame.size.height < viewHeight-StatusBar-MARGIN && controlState == None)
     {
-        frame.origin.y = (SCREEN_HEIGHT-frame.size.height)/2 - MARGIN;
+        frame.origin.y = (viewHeight-frame.size.height)/2 - StatusBar;
     }
     return frame;
 }
@@ -434,10 +439,10 @@ CGPoint abPoint;
 {
     if (iPHONE)
     {
-        rgbInfo.frame = SET_Y(rgbInfo.frame , SCREEN_HEIGHT - BOTTON_BAR_HEIGHT);
+        rgbInfo.frame = SET_Y(rgbInfo.frame , viewHeight - BOTTON_BAR_HEIGHT);
         rgbInfo.frame = SET_X(rgbInfo.frame , -GET_WIDTH(rgbInfo.frame));
-        actionBar.frame = SET_Y(actionBar.frame, SCREEN_HEIGHT - BOTTON_BAR_HEIGHT);
-        actionBar.frame = SET_X(actionBar.frame, SCREEN_WIDTH);
+        actionBar.frame = SET_Y(actionBar.frame, viewHeight - BOTTON_BAR_HEIGHT);
+        actionBar.frame = SET_X(actionBar.frame, viewWidth);
     }
     else
     {
@@ -455,32 +460,32 @@ CGPoint abPoint;
 
 - (void)doTransform:(CGAffineTransform) transform
 {
-    CGFloat minHeight = controlState != None ? SCREEN_HEIGHT - BOTTON_BAR_HEIGHT : SCREEN_HEIGHT;
+    CGFloat minHeight = controlState != None ? viewHeight - BOTTON_BAR_HEIGHT : viewHeight;
     imageView.transform = transform;
     scrollView.contentSize =  imageView.frame.size;
     CGRect frame = scrollView.frame;
-    if (imageView.frame.size.height < minHeight - MARGIN*2)
+    if (imageView.frame.size.height < minHeight - StatusBar - MARGIN)
     {
         frame.size.height =imageView.frame.size.height;
         frame.origin.y = (minHeight-frame.size.height)/2;
     }
     else
     {
-        frame.size.height = minHeight - MARGIN*2;
-        frame.origin.y = MARGIN;
+        frame.size.height = minHeight - StatusBar - MARGIN;
+        frame.origin.y = StatusBar;
         frame.size.width = minHeight;
     }
     
-    if (imageView.frame.size.width < SCREEN_WIDTH-MARGIN*2)
+    if (imageView.frame.size.width < viewWidth-MARGIN*2)
     {
         frame.size.width = imageView.frame.size.width;
-        frame.origin.x = (SCREEN_WIDTH-frame.size.width)/2;
+        frame.origin.x = (viewWidth-frame.size.width)/2;
     }
     else
     {
         
         frame.origin.x = MARGIN;
-        frame.size.width = SCREEN_WIDTH - MARGIN *2;
+        frame.size.width = viewWidth - MARGIN *2;
     }
     
     scrollView.frame = frame;
@@ -573,15 +578,15 @@ CGPoint abPoint;
 {
     // reset imageView transform
     imageView.transform = CGAffineTransformIdentity;
-    scrollView.alpha = 0;
+    //scrollView.alpha = 0;
     image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
     imageView.frame = frame;
     scrollView.contentSize = imageView.frame.size;
     imageView.image = image;
-    scrollView.frame = SET_HEIGHT(scrollView.frame, SCREEN_HEIGHT);
-    scrollView.frame = SET_WIDTH(scrollView.frame, SCREEN_WIDTH);
+    //scrollView.frame = SET_HEIGHT(scrollView.frame, SCREEN_HEIGHT);
+    //scrollView.frame = SET_WIDTH(scrollView.frame, SCREEN_WIDTH);
     [ipc dismissViewControllerAnimated:true completion:^{
         if (iPAD && picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary)
         {
