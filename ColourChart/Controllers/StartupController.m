@@ -44,7 +44,16 @@
                 NSArray *listItems = [line componentsSeparatedByString:@":"];
                 [ColorCodeController.instance buildColorCodeDictionary:listItems[1] ColorHex:listItems[0]];
             }];
-            [DBManager.instance saveChunk:[ColorCodeController.instance getHexDictionary]];
+            [ColorCodeController.instance parseColorCode];
+            NSMutableArray* n = [ColorCodeController.instance getNameArray];
+            NSMutableArray* h = [ColorCodeController.instance getHexArray];
+            NSMutableArray* r = [ColorCodeController.instance getRedArray];
+            NSMutableArray* g = [ColorCodeController.instance getGreenArray];
+            NSMutableArray* b = [ColorCodeController.instance getBlueArray];
+            [DBManager.instance bulkSave:n Hex:h R:r G:g B:b];
+            //[DBManager.instance saveChunk:[ColorCodeController.instance getHexDictionary]];
+            
+
             
 //                CancellableOperation *op = [[CancellableOperation alloc] initWithPFQuery:query];
 //                [OperationQueueManager.instance addToQueue:op];

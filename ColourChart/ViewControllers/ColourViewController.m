@@ -21,6 +21,8 @@ const float MAXIMUM_SCALE = 1.5;
 
 const int MARGIN = 14;
 const int StatusBar = 44;
+const int iPadStatusBar = 22;
+const int iPadTopBar = 46;
 const int BOTTON_BAR_HEIGHT = 100;
 const int SIDE_BAR_WIDTH = 122;
 const int ACTION_BAR_WIDTH = 110;
@@ -89,8 +91,13 @@ int viewHeight;
     // reset page status to default values
     tappedPoint.hidden = true;
     [tappedPoint setTitle:@"" forState:UIControlStateNormal];
-    [colorCodeBtn setTitle:@"R:G:B:" forState:UIControlStateNormal];
-    [colorNameBtn setTitle:@"" forState:UIControlStateNormal];
+    [self roundView:redValue withRadius:15.0 andStroke:2.0 andColor:UIColor.whiteColor];
+    [self roundView:greenValue withRadius:15.0 andStroke:2.0 andColor:UIColor.whiteColor];
+    [self roundView:blueValue withRadius:15.0 andStroke:2.0 andColor:UIColor.whiteColor];
+    [self roundView:colorName withRadius:15.0 andStroke:2.0 andColor:UIColor.whiteColor];
+    
+    //[colorCodeBtn setTitle:@"R:G:B:" forState:UIControlStateNormal];
+    //[colorNameBtn setTitle:@"" forState:UIControlStateNormal];
     [scrollView setBackgroundColor:[UIColor blackColor]];
     [self.view setBackgroundColor:[UIColor blackColor]];
     
@@ -128,11 +135,7 @@ int viewHeight;
                 if (xPos < viewWidth/2) [self showRGB:false];
                 else [self showAction:true];
             }
-            else
-            {
-                if (xPos < viewHeight/2) [self showRGB:false];
-                else [self showAction:false];
-            }
+            
             break;
             
         case UISwipeGestureRecognizerDirectionRight:
@@ -142,11 +145,7 @@ int viewHeight;
                 if (xPos < viewWidth/2) [self showRGB:true];
                 else [self showAction:false];
             }
-            else
-            {
-                if (xPos < viewHeight/2) [self showRGB:true];
-                else [self showAction:true];
-            }
+            
             break;
             
         case UISwipeGestureRecognizerDirectionUp:
@@ -250,8 +249,8 @@ int viewHeight;
                      animations:^{
                          if (rgbOffSet != -1)
                          {
-                             self->rgbInfo.alpha = rgbOffSet == 0 ? 0.8 : 0.5;
-                             self->rgbInfo.frame = SET_X(self->rgbInfo.frame, -rgbOffSet);
+//                             self->rgbInfo.alpha = rgbOffSet == 0 ? 0.8 : 0.5;
+//                             self->rgbInfo.frame = SET_X(self->rgbInfo.frame, -rgbOffSet);
                          }
                          if (iPHONE && actionOffSet != -1)
                          {
@@ -261,8 +260,8 @@ int viewHeight;
                          }
                          else if (iPAD && actionOffSet != -1)
                          {
-                             self->actionBar.alpha = actionOffSet == 0 ? 0.8 : 0.5;
-                             self->actionBar.frame = SET_X(self->actionBar.frame, -actionOffSet);
+//                             self->actionBar.alpha = actionOffSet == 0 ? 0.8 : 0.5;
+//                             self->actionBar.frame = SET_X(self->actionBar.frame, -actionOffSet);
                          }
 
                          // change scroll view frame
@@ -290,16 +289,8 @@ int viewHeight;
 }
 - (CGRect)getScrollViewFrameiPad:(CGRect)frame
 {
-    if (controlState != None)
-    {
-        frame.size.width = viewWidth - SIDE_BAR_WIDTH - MARGIN*2;
-        frame.origin.x = SIDE_BAR_WIDTH + MARGIN;
-    }
-    else
-    {
-        frame.size.width = viewWidth-MARGIN*2;
-        frame.origin.x = MARGIN;
-    }
+    frame.size.width = viewWidth-MARGIN*2;
+    frame.origin.x = MARGIN;
     
     if (GET_WIDTH(imageView.frame) < frame.size.width)
     {
@@ -312,14 +303,14 @@ int viewHeight;
         frame.origin.x -= diff/2;
     }
     
-    frame.origin.y = MARGIN;
-    frame.size.height = viewHeight-MARGIN*2;
+    frame.origin.y = MARGIN+iPadStatusBar+iPadTopBar;
+    frame.size.height = viewHeight-MARGIN*2-iPadStatusBar-iPadTopBar;
     if (GET_HEIGHT(imageView.frame) < frame.size.height)
     {
         frame.size.height = GET_HEIGHT(imageView.frame);
     }
    
-    diff = viewHeight-MARGIN*2 - frame.size.height;
+    diff = viewHeight-MARGIN*2-iPadStatusBar-iPadTopBar - frame.size.height;
     if (diff > 0)
     {
         frame.origin.y += diff/2;
@@ -376,15 +367,18 @@ int viewHeight;
     [selectedColor getRed:&red green:&green blue:&blue alpha:&alpha];
     
 
-    [colorCodeBtn setTitle:[NSString stringWithFormat:@"R:%i G:%i B:%i",(int)(red*255), (int)(green*255), (int)(blue*255)] forState:UIControlStateNormal];
+//    [colorCodeBtn setTitle:[NSString stringWithFormat:@"R:%i G:%i B:%i",(int)(red*255), (int)(green*255), (int)(blue*255)] forState:UIControlStateNormal];
+    [redValue setText:[NSString stringWithFormat:@" R: %i",(int)(red*255)]];
+    [greenValue setText:[NSString stringWithFormat:@" G: %i",(int)(green*255)]];
+    [blueValue setText:[NSString stringWithFormat:@" B: %i",(int)(blue*255)]];
     
     NSString *color;
     if (OperationQueueManager.instance.opCount == 0)
         color = [ColorCodeController.instance getColorName:red*255 g:green*255 b:blue*255];
     else
         color = @"Local database is not ready yet";
-    [colorNameBtn setTitle:color forState:UIControlStateNormal];
-    
+    //[colorNameBtn setTitle:color forState:UIControlStateNormal];
+    [colorName setText:[NSString stringWithFormat:@" Name: %@",color]];
     [scrollView setBackgroundColor:selectedColor];
     [self.view setBackgroundColor:selectedColor];
     
@@ -442,18 +436,6 @@ int viewHeight;
         actionBar.frame = SET_Y(actionBar.frame, viewHeight - BOTTON_BAR_HEIGHT);
         actionBar.frame = SET_X(actionBar.frame, viewWidth);
     }
-    else
-    {
-//        rgbInfo.frame = SET_X(rgbInfo.frame , -GET_WIDTH(rgbInfo.frame));
-//        actionBar.frame = SET_X(actionBar.frame , -GET_WIDTH(actionBar.frame));
-    }
-//    [UIView animateWithDuration:0.2f
-//                          delay:0
-//                        options:UIViewAnimationOptionCurveEaseIn
-//                     animations:^{
-//        self->scrollView.alpha = 1;
-//                     }
-//                     completion:nil];
 }
 
 - (void)doTransform:(CGAffineTransform) transform
@@ -510,13 +492,22 @@ int viewHeight;
         [self presentViewController:ipc animated:true completion:nil];
         [self showAction:true];
         [self showRGB:true];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Unable to acces selected photo sources"
-                                                       message:@"Photo Library is not available in this device."
-                                                      delegate:nil
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-        [alert show];
+    }
+    else
+    {
+        UIAlertController *alertController = [UIAlertController
+                                      alertControllerWithTitle:@"Unable to acces selected photo sources"
+                                      message:@"Photo Library is not available in this device."
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction
+                    actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                              style:UIAlertActionStyleDefault
+                            handler:^(UIAlertAction *action)
+                            {
+                              NSLog(@"OK action");
+                            }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
@@ -534,13 +525,23 @@ int viewHeight;
         [self presentViewController:ipc animated:true completion:nil];
         [self showAction:false];
         [self showRGB:false];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Unable to acces Camera"
-                                                       message:@"Camera is not available in this device."
-                                                      delegate:nil
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-        [alert show];
+    }
+    else
+    {
+        UIAlertController *alertController = [UIAlertController
+                                      alertControllerWithTitle:@"Unable to acces Camera"
+                                      message:@"Camera is not available in this device."
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction
+                    actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                              style:UIAlertActionStyleDefault
+                            handler:^(UIAlertAction *action)
+                            {
+                              NSLog(@"OK action");
+                            }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+
     }
     
 }

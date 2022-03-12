@@ -17,6 +17,7 @@
 @property (strong) NSMutableArray* green;
 @property (strong) NSMutableArray* blue;
 @property (strong) NSMutableArray* name;
+@property (strong) NSMutableArray* hex;
 
 + (ColorCodeController*)instance;
 
@@ -24,4 +25,9 @@
 - (NSMutableDictionary*)getHexDictionary;
 - (void)parseColorCode;
 - (NSString*)getColorName:(int)r g:(int)g b:(int)b;
+- (NSMutableArray*)getNameArray;
+- (NSMutableArray*)getHexArray;
+- (NSMutableArray*)getRedArray;
+- (NSMutableArray*)getGreenArray;
+- (NSMutableArray*)getBlueArray;
 @end

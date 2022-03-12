@@ -16,9 +16,10 @@
 
 + (DBManager*)instance;
 - (BOOL)createDB;
-- (BOOL)saveData:(NSString*)name ColorHex:(NSString*)hex;
-- (BOOL)saveChunk:(NSDictionary*)hexcode;
+- (BOOL)saveData:(NSString*)name ColorHex:(NSString*)hex R:(int)r G:(int)g B:(int)b;
+- (BOOL)bulkSave:(NSArray*)name Hex:(NSArray*)hex R:(NSArray*)r G:(NSArray*)g B:(NSArray*)b;
 - (NSMutableDictionary*)getData;
+- (void)loadColorData:(NSMutableArray*)name Hex:(NSMutableArray*)hex R:(NSMutableArray*)r G:(NSMutableArray*)g B:(NSMutableArray*)b;
 - (BOOL)dbExist;
 - (void)removeDbFile;
 @end

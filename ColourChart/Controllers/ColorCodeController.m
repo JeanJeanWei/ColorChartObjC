@@ -13,7 +13,9 @@
 
 
 @implementation ColorCodeController
-@synthesize red, green, blue, name;
+@synthesize red, green, blue, name, hex;
+
+bool dataLoadedFromDb = false;
 
 + (ColorCodeController*)instance
 {
@@ -45,6 +47,7 @@
     green = [NSMutableArray new];
     blue = [NSMutableArray new];
     name = [NSMutableArray new];
+    hex= [NSMutableArray new];
 }
 
 - (void)buildColorCodeDictionary:(NSString*)name ColorHex:(NSString*)hex
@@ -56,23 +59,35 @@
 {
     @try
     {
-        if (!hexCode || hexCode.count == 0)
-            hexCode = [DBManager.instance getData];
-        if (!name)
-            [self initArrays];
-        
-        if (name.count != hexCode.count)
-            [self initArrays];
-        
-        if (hexCode != nil && name != nil && name.count == 0)
+        if ((!hexCode || hexCode.count == 0) && hex.count == 0)
         {
-            for (NSString *key in hexCode)
+            [DBManager.instance loadColorData:name Hex:hex  R:red G:green B:blue ];
+            dataLoadedFromDb = true;
+        }
+        else if (dataLoadedFromDb)
+        {
+            return;
+        }
+        else
+        {
+            if (!name)
+                [self initArrays];
+            
+            if (name.count != hexCode.count)
+                [self initArrays];
+            
+            if (hexCode != nil && name != nil && name.count == 0)
             {
-                NSString *colorName = [hexCode objectForKey:key];
-                [name addObject:colorName];
-                [red addObject:[NSNumber numberWithInteger:[self parseHexToInt:[key substringToIndex:2]]]];
-                [green addObject:[NSNumber numberWithInteger:[self parseHexToInt:[key substringWithRange:NSMakeRange(2, 2)]]]];
-                [blue addObject:[NSNumber numberWithInteger:[self parseHexToInt:[key substringFromIndex:4]]]];
+                for (NSString *key in hexCode)
+                {
+                    NSString *colorName = [hexCode objectForKey:key];
+                    
+                    [name addObject:colorName];
+                    [hex addObject:key];
+                    [red addObject:[NSNumber numberWithInteger:[self parseHexToInt:[key substringToIndex:2]]]];
+                    [green addObject:[NSNumber numberWithInteger:[self parseHexToInt:[key substringWithRange:NSMakeRange(2, 2)]]]];
+                    [blue addObject:[NSNumber numberWithInteger:[self parseHexToInt:[key substringFromIndex:4]]]];
+                }
             }
         }
     }
@@ -122,5 +137,30 @@
         }
     }
     return  cName;
+}
+
+- (NSMutableArray*)getNameArray
+{
+    return name;
+}
+
+- (NSMutableArray*)getHexArray
+{
+    return hex;
+}
+
+- (NSMutableArray*)getRedArray
+{
+    return red;
+}
+
+- (NSMutableArray*)getGreenArray
+{
+    return green;
+}
+
+- (NSMutableArray*)getBlueArray
+{
+    return blue;
 }
 @end

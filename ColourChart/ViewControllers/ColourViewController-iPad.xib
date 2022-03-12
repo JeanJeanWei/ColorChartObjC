@@ -10,8 +10,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ColourViewController">
             <connections>
                 <outlet property="actionBar" destination="LK4-40-vZv" id="Ry3-gE-uUx"/>
-                <outlet property="colorCodeBtn" destination="VDd-ov-0x7" id="e9l-cE-yjl"/>
-                <outlet property="colorNameBtn" destination="BjL-l4-jyZ" id="US5-VS-6zi"/>
+                <outlet property="blueValue" destination="MBC-30-WVp" id="xh4-g8-1tR"/>
+                <outlet property="colorName" destination="mPW-GU-HK3" id="dRp-aV-J3b"/>
+                <outlet property="greenValue" destination="8Mg-qp-eUd" id="c4b-7l-D1b"/>
+                <outlet property="redValue" destination="t46-YM-8xx" id="l6Q-8M-A7e"/>
                 <outlet property="rgbInfo" destination="Til-PG-eoX" id="qgN-OV-cg7"/>
                 <outlet property="scrollView" destination="NNF-dI-gof" id="I3z-SF-t2J"/>
                 <outlet property="tappedPoint" destination="fwk-Pj-XoL" id="gg7-kH-Pd8"/>
@@ -23,45 +25,12 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.79999999999999982" contentMode="scaleToFill" id="LK4-40-vZv" userLabel="actionBar" customClass="UIControl">
-                    <rect key="frame" x="904" y="20" width="120" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wv-tF-WVL">
-                            <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.094117647058823528" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="picture_icon_white.png">
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="albumPressed" destination="-1" eventType="touchUpInside" id="DsP-pN-JZJ"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ke-RS-Sd6">
-                            <rect key="frame" x="60" y="0.0" width="50" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.094117647060000004" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" image="camera_icon_white.png">
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="cameraPressed" destination="-1" eventType="touchUpInside" id="3PD-4z-dRe"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <connections>
-                        <action selector="hideActionBar" destination="-1" eventType="touchUpInside" id="vVV-kT-3fI"/>
-                    </connections>
-                </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NNF-dI-gof">
-                    <rect key="frame" x="0.0" y="70" width="1024" height="698"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NNF-dI-gof">
+                    <rect key="frame" x="0.0" y="72" width="1024" height="696"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fwk-Pj-XoL">
-                            <rect key="frame" x="480" y="325" width="33" height="33"/>
+                            <rect key="frame" x="480" y="323" width="33" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
@@ -75,47 +44,90 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                 </scrollView>
-                <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Til-PG-eoX" userLabel="rgbInfo" customClass="UIControl">
-                    <rect key="frame" x="0.0" y="20" width="400" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Til-PG-eoX" userLabel="rgbInfo" customClass="UIControl">
+                    <rect key="frame" x="0.0" y="0.0" width="894" height="72"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDd-ov-0x7">
-                            <rect key="frame" x="0.0" y="0.0" width="180" height="45"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" R:" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t46-YM-8xx">
+                            <rect key="frame" x="10" y="22" width="100" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
-                            <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <size key="titleShadowOffset" width="1" height="1"/>
-                            <state key="normal" title="R:G:B:" backgroundImage="white.png">
-                                <color key="titleColor" red="1" green="0.71975522209999998" blue="0.040663795590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BjL-l4-jyZ">
-                            <rect key="frame" x="210" y="0.0" width="180" height="45"/>
+                            <color key="backgroundColor" red="0.81721109150000004" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" G:" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mg-qp-eUd">
+                            <rect key="frame" x="120" y="22" width="100" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="13"/>
-                            <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <size key="titleShadowOffset" width="1" height="1"/>
-                            <state key="normal" backgroundImage="black.png">
-                                <color key="titleColor" red="1" green="0.96546128419999999" blue="0.030378318630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
+                            <color key="backgroundColor" red="0.19429084660000001" green="0.61775952580000004" blue="0.0068774754180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" B:" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBC-30-WVp">
+                            <rect key="frame" x="230" y="22" width="100" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.013585039409999999" green="0.52594935890000005" blue="0.72987037899999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Name:" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPW-GU-HK3">
+                            <rect key="frame" x="340" y="22" width="400" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.00077224115379999998" green="0.070737071339999999" blue="0.1996816099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.070588235289999995" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <action selector="hideRGB" destination="-1" eventType="touchUpInside" id="KTe-cT-xpv"/>
                     </connections>
                 </view>
+                <view contentMode="scaleToFill" id="LK4-40-vZv" userLabel="actionBar" customClass="UIControl">
+                    <rect key="frame" x="894" y="0.0" width="130" height="72"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ke-RS-Sd6">
+                            <rect key="frame" x="70" y="22" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="camera_icon_white.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cameraPressed" destination="-1" eventType="touchUpInside" id="3PD-4z-dRe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wv-tF-WVL">
+                            <rect key="frame" x="10" y="22" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="picture_icon_white.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="albumPressed" destination="-1" eventType="touchUpInside" id="DsP-pN-JZJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.070588235289999995" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <action selector="hideActionBar" destination="-1" eventType="touchUpInside" id="vVV-kT-3fI"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.070588235294117646" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="44.53125" y="52.734375"/>
+            <point key="canvasLocation" x="44.53125" y="52.34375"/>
         </view>
     </objects>
     <resources>
-        <image name="black.png" width="270" height="45"/>
         <image name="camera_icon_white.png" width="40.5" height="31.5"/>
         <image name="cursor_icon.png" width="32.5" height="32.5"/>
         <image name="picture_icon_white.png" width="40.5" height="32.5"/>
-        <image name="white.png" width="270" height="45"/>
     </resources>
 </document>
